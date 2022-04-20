@@ -9,6 +9,39 @@ GPIO.setup(15,GPIO.OUT) # enable, was 22
 GPIO.setup(13,GPIO.OUT) # direction, was 21
 GPIO.setup(11,GPIO.OUT) # step, was 20
 
+GPIO.output(15,GPIO.LOW)#enable turned on
+delay = 0.0000000001 #delay for the created pwm
+GPIO.output(13,GPIO.HIGH) #direction chosen: HIGH=CCW, LOW=CW
+
+print("Engage Hyper Drive")#start
+tic = int(time.perf_counter())#timer start
+tac = 0.0#total elapsed time initialized
+while tac < 240.0: #loop to run for 24 seconds
+  GPIO.output(11, GPIO.HIGH) #step off
+  sleep(delay)
+  GPIO.output(11, GPIO.LOW)#step on
+  sleep(delay)
+  toc = int(time.perf_counter())#timer end
+  tac = toc - tic #total time elapsed 
+  #print(tac)
+  
+print(tac)
+print("That's no moon...")
+GPIO.cleanup()
+
+
+
+'''import RPi.GPIO as GPIO
+import time
+from time import sleep
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+
+GPIO.setup(15,GPIO.OUT) # enable, was 22
+GPIO.setup(13,GPIO.OUT) # direction, was 21
+GPIO.setup(11,GPIO.OUT) # step, was 20
+
 step_count = 200000  # number of step to run  change this to change were it stops
 delay = 0.000001
 GPIO.output(15, GPIO.LOW)
@@ -37,4 +70,4 @@ for x in range(step_count):
 # end of program
 print (" End program")
 
-GPIO.cleanup()
+GPIO.cleanup()'''
